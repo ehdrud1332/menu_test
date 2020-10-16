@@ -25,7 +25,10 @@ const BottomAuth = ({navigation, route}) => {
         <Tab.Navigator
             tabBarOptions={{
                 //누를때=active 색갈
-                activeTintColor: 'black',
+                inactiveBackgroundColor: "#000000",
+                activeBackgroundColor: "#000000",
+                activeTintColor: "#fff",
+                inactiveTintColor: "#9b9b9b",
                 labelStyle: {fontWeight: '400', textTransform: 'uppercase'}
             }}
         >
@@ -36,7 +39,7 @@ const BottomAuth = ({navigation, route}) => {
                     tabBarIcon: ({focused}) => (
                         <Ionicons
                             name="ios-home"
-                            color= {focused ? "black" : "#5a5a5a"}
+                            color= {focused ? "#fff" : "#9b9b9b"}
                             size={26}
                         />
                     )
@@ -49,7 +52,7 @@ const BottomAuth = ({navigation, route}) => {
                     tabBarIcon: ({focused}) => (
                         <Ionicons
                             name="ios-search"
-                            color= {focused ? "black" : "#5a5a5a"}
+                            color= {focused ? "#fff" : "#9b9b9b"}
                             size={26}
                         />
                     )
@@ -62,7 +65,7 @@ const BottomAuth = ({navigation, route}) => {
                     tabBarIcon: ({focused}) => (
                         <Ionicons
                             name="md-person"
-                            color= {focused ? "black" : "#5a5a5a"}
+                            color= {focused ? "#fff" : "#9b9b9b"}
                             size={26}
                         />
                     )
