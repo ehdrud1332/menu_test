@@ -33,7 +33,7 @@ const renderTabBar = props => (
 const initialLayout = {width: Dimensions.get('window').width}
 
 
-const MainScreen = () => {
+const MainScreen = ({navigation}) => {
 
     const [index, setIndex] = useState(0);
     const [routes] = useState([
@@ -55,7 +55,10 @@ const MainScreen = () => {
                 >
                     <Block flex={false} row space="between" style={styles.categories}>
                         {result.products.map(product => (
-                            <TouchableOpacity>
+                            <TouchableOpacity
+                                key={product.id}
+                                onPress={() => navigation.navigate("Detail", product.id)}
+                            >
                                 <Card center middle shadow style={styles.category}>
                                     <Badge
                                         margin={[0, 0, 15]}

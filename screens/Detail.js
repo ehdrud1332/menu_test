@@ -1,11 +1,23 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {
+    ScrollView,
+    TouchableOpacity
+} from 'react-native';
 
-const Detail = () => {
+import {Block, Text, Button, Card, Badge} from '../components';
+
+const Detail = ({
+    navigation,
+    route: {
+        params: id
+    }
+}) => {
     return (
-        <View>
-            <Text>Detail</Text>
-        </View>
+        <Block>
+            <Text>
+                {id}
+            </Text>
+        </Block>
     );
 };
 
