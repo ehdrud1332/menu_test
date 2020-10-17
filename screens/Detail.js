@@ -2,11 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {
     ScrollView,
     TouchableOpacity,
-    Image
+    Image,
+    StyleSheet,
+    Animated,
+    View,
+    Text
 } from 'react-native';
-
-import {productApi} from '../api';
-import {Block, Text, Button, Card, Badge} from '../components';
+import {theme} from '../constants';
+import {productApi, apiImage} from '../api';
+import {Block, Button, Card, Badge} from '../components';
 
 const Detail = ({
     route: {
@@ -14,9 +18,12 @@ const Detail = ({
     }
 }) => {
 
+    const scrollX = new Animated.Value(0);
+
+
     const [result, setDetail] = useState({
         loading: true,
-        datail: {},
+        detailView: {},
         detailError: null
     })
 
@@ -24,10 +31,10 @@ const Detail = ({
         const [detail, detailError] = await productApi.detail(id);
         setDetail({
             loading: false,
-            detail,
+            detailView: detail,
             detailError
         })
-        console.log(detail)
+        console.log(apiImage(result.detailView.image.url))
 
     }
     useEffect(() => {
@@ -38,14 +45,56 @@ const Detail = ({
 
     return (
         <Block>
-            <Text>
-                {result.detail.name}
-            </Text>
-            <Text>
+            <View style={styles.flex}>
+                <CachedImage source={{uri: `http://localhost:1337/${result.detailView.image.url}`}}/>
+            </View>
+            <View style={styles.flex}>
+                <View style={[styles.flex, styles.contentHeader]}>
+                    <Text>{result.detailView.name}</Text>
+                    <View style={{alignItems: 'center'}}>
+                        <Text style={{color: theme.colors.accent}}>
+                            ${result.detailView.Price}{"        "}
+                             남은갯수 {result.detailView.Stock}
+                        </Text>
+                        <Text style={[styles.description]}>
+                            {/*{result.detailView.Desc.split('').slice(0, 100)}...*/}
+                            <TouchableOpacity>
+                                <Text style={{color: theme.colors.active}}>Read more</Text>
+                            </TouchableOpacity>
+                        </Text>
 
-            </Text>
+                    </View>
+
+                </View>
+            </View>
         </Block>
     );
 };
 
 export default Detail;
+
+const styles = StyleSheet.create({
+    flex: {
+        flex: 1
+    },
+    column: {
+        flexDirection: 'column'
+    },
+    row: {
+        flexDirection: 'row'
+    },
+    contentHeader: {
+        // backgroundColor: 'transparent',
+        padding: theme.sizes.padding,
+        backgroundColor: theme.colors.white,
+        borderTopLeftRadius: theme.sizes.radius,
+        borderTopRightRadius: theme.sizes.radius,
+        marginTop: -theme.sizes.padding / 2
+    },
+    description: {
+        fontSize: theme.sizes.font * 1.2,
+        lineHeight: theme.sizes.font * 2,
+        color: theme.colors.caption
+    }
+})
+
