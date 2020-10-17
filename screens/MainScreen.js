@@ -99,7 +99,7 @@ const MainScreen = ({navigation}) => {
             products,
             productsError
         })
-        console.log(products)
+        // console.log(products)
     }
 
     useEffect(() => {

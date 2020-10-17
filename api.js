@@ -20,7 +20,8 @@ const getAnything = async(path, params = {}) => {
 };
 
 export const productApi = {
-    all : () => getAnything('/products')
+    all : () => getAnything('/products'),
+    detail : (id) => getAnything(`/products/${id}`)
 }
 
 export const apiImage = (

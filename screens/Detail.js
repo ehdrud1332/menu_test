@@ -1,21 +1,48 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
+    Image
 } from 'react-native';
 
+import {productApi} from '../api';
 import {Block, Text, Button, Card, Badge} from '../components';
 
 const Detail = ({
-    navigation,
     route: {
         params: id
     }
 }) => {
+
+    const [result, setDetail] = useState({
+        loading: true,
+        datail: {},
+        detailError: null
+    })
+
+    const getData = async() => {
+        const [detail, detailError] = await productApi.detail(id);
+        setDetail({
+            loading: false,
+            detail,
+            detailError
+        })
+        console.log(detail)
+
+    }
+    useEffect(() => {
+        getData();
+    }, [])
+
+
+
     return (
         <Block>
             <Text>
-                {id}
+                {result.detail.name}
+            </Text>
+            <Text>
+
             </Text>
         </Block>
     );
