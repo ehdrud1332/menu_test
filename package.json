@@ -15,6 +15,7 @@
     "@react-navigation/stack": "^5.9.3",
     "axios": "^0.20.0",
     "expo": "~39.0.2",
+    "expo-asset": "~8.2.0",
     "expo-linear-gradient": "~8.3.0",
     "expo-status-bar": "~1.0.2",
     "react": "16.13.1",
@@ -28,7 +29,9 @@
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/core": "~7.9.0",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^10.0.4"
   },
   "private": true
 }

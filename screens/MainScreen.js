@@ -4,7 +4,9 @@ import {
     StyleSheet,
     Dimensions,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
+    View,
+    StatusBar
 } from 'react-native';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 
@@ -54,7 +56,7 @@ const MainScreen = ({navigation}) => {
 
     const renderScene = SceneMap({
         first: () =>
-            <Block flex={true} cednter style={{backgroundColor: 'white'}}>
+            <Block flex={true} center style={{backgroundColor: 'white'}}>
                 <ScrollView
                     style={{paddingVertical: theme.sizes.base * 2}}
                 >
@@ -62,21 +64,21 @@ const MainScreen = ({navigation}) => {
                         {result.products.map(product => (
                             <TouchableOpacity
                                 key={product.id}
-                                onPress={() => navigation.navigate("Detail", product.id)}
+                                onPress={() => navigation.navigate("DetailScreen", product.id)}
                             >
                                 <Card center middle shadow style={styles.category}>
                                     <Badge
                                         margin={[0, 0, 15]}
                                         size={50}
-                                        color='rgba(41, 216, 143, 0.20'
+                                        color='rgba(41, 216, 143, 0.20)'
                                     >
                                         <Image
                                             style={{width: 80, height: 80}}
-                                            source={{uri: `http://localhost:1337${product.image.url}`}}
+                                            source={{uri: apiImage(product.sourceImage.url)}}
                                         />
                                     </Badge>
                                     <Text medium>
-                                        {product.name}
+                                        {product.product}
                                     </Text>
                                     <Text grey caption>
                                         $ {product.price}
@@ -107,6 +109,15 @@ const MainScreen = ({navigation}) => {
     }, [])
 
     return (
+        <Block flex>
+            <StatusBar barStyle="light-content"/>
+            <View style={{
+                backgroundColor: 'black', height: 70
+            }}>
+                <Text center align bold spacing={20} size={21} style={styles.titleName}>
+                    CASTLE
+                </Text>
+            </View>
         <TabView
             renderScene={renderScene}
             onIndexChange={setIndex}
@@ -114,6 +125,7 @@ const MainScreen = ({navigation}) => {
             initialLayout={initialLayout}
             renderTabBar={renderTabBar}
         />
+        </Block>
     );
 };
 
@@ -154,5 +166,9 @@ const styles = StyleSheet.create({
         maxHeight: (width - theme.sizes.padding * 2.4 - theme.sizes.base) / 2,
         marginBottom: 30,
         padding: 5
+    },
+    titleName: {
+        color: theme.colors.white,
+        marginTop: 50,
     }
 });

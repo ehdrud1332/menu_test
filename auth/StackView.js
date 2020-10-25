@@ -2,14 +2,14 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import BottomAuth from "./BottomAuth";
-import Detail from "../screens/Detail";
+import DetailScreen from "../screens/DetailScreen";
 
 const Stack = createStackNavigator();
 
 const StackView = () => (
-    <Stack.Navigator>
+    <Stack.Navigator headerMode="none">
         <Stack.Screen name="BottomAuth" component={BottomAuth}/>
-        <Stack.Screen name="Detail" component={Detail}/>
+        <Stack.Screen name="DetailScreen" component={DetailScreen}/>
     </Stack.Navigator>
 )
 
